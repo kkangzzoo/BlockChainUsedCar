@@ -1,0 +1,75 @@
+membersrvc:
+  image: hyperledger/fabric-membersrvc:latest
+  ports:
+    - "7054:7054"
+  command: membersrvc
+vp0:
+  image: hyperledger/peer:1.0
+  ports:
+    - "7050:7050"
+    - "7051:7051"
+    - "7053:7053"
+  environment:
+    - CORE_PEER_ADDRESSAUTODETECT=true
+    - CORE_VM_ENDPOINT=http://192.168.99.100:2476
+    - CORE_LOGGING_LEVEL=DEBUG
+    - CORE_PEER_ID=vp0
+    - CORE_PEER_PKI_ECA_PADDR=membersrvc:7054
+    - CORE_PEER_PKI_TCA_PADDR=membersrvc:7054
+    - CORE_PEER_PKI_TLSCA_PADDR=membersrvc:7054
+    - CORE_SECURITY_ENABLED=true
+    - CORE_SECURITY_ENROLLID=test_vp0
+    - CORE_SECURITY_ENROLLSECRET=MwYpmSRjupbT
+  hostname: vp0
+  container_name: vp0
+  links:
+    - membersrvc
+  command: sh -c "sleep 5; peer node start"
+vp1:
+  image: hyperledger/peer:1.0
+  ports:
+    - "7061:7061"
+  environment:
+    - CORE_PEER_ADDRESSAUTODETECT=true
+    - CORE_VM_ENDPOINT=http://192.168.99.100:2476
+    - CORE_LOGGING_LEVEL=DEBUG
+    - CORE_PEER_ID=vp1
+    - CORE_PEER_ADDRESS=0.0.0.0:7061
+    - CORE_PEER_LISTENADDRESS=0.0.0.0:7061
+    - CORE_PEER_PKI_ECA_PADDR=membersrvc:7054
+    - CORE_PEER_PKI_TCA_PADDR=membersrvc:7054
+    - CORE_PEER_PKI_TLSCA_PADDR=membersrvc:7054
+    - CORE_SECURITY_ENABLED=true
+    - CORE_SECURITY_ENROLLID=test_vp1
+    - CORE_SECURITY_ENROLLSECRET=5wgHK9qqYaPy
+    - CORE_PEER_DISCOVERY_ROOTNODE=192.168.99.100:7051
+  hostname: vp1
+  container_name: vp1
+  links:
+    - membersrvc
+    - vp0
+  command: sh -c "sleep 5; peer node start"
+vp2:
+  image: hyperledger/peer:1.0
+  ports:
+    - "7071:7071"
+  environment:
+    - CORE_PEER_ADDRESSAUTODETECT=true
+    - CORE_VM_ENDPOINT=http://192.168.99.100:2476
+    - CORE_LOGGING_LEVEL=DEBUG
+    - CORE_PEER_ID=vp2
+    - CORE_PEER_ADDRESS=0.0.0.0:7071
+    - CORE_PEER_LISTENADDRESS=0.0.0.0:7071
+    - CORE_PEER_PKI_ECA_PADDR=membersrvc:7054
+    - CORE_PEER_PKI_TCA_PADDR=membersrvc:7054
+    - CORE_PEER_PKI_TLSCA_PADDR=membersrvc:7054
+    - CORE_SECURITY_ENABLED=true
+    - CORE_SECURITY_ENROLLID=test_vp2
+    - CORE_SECURITY_ENROLLSECRET=vQelbRvja7cJ
+    - CORE_PEER_DISCOVERY_ROOTNODE=192.168.99.100:7051
+  hostname: vp2
+  container_name: vp2
+  links:
+    - membersrvc
+    - vp0
+  command: sh -c "sleep 5; peer node start"
