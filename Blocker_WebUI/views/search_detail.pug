@@ -1,0 +1,49 @@
+extends layout2
+block content
+  body
+    nav.navbar.navbar-inverse(style='width: 200%;background-color:#4272d7')
+      .container-fluid
+        .col-sm-1
+        .col-sm-1
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a(href='/main', style='font-size:300%; background-color:#4272d7; color:white')
+            strong CarBlocker
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a.nav-a-style(href='/search', style='color:white; margin-top:20px') 차량
+            li
+              a.nav-a-style(href='/sell', style='color:white; margin-top:20px') 내 차 팔기
+            li
+              a.nav-a-style(href='#', style='color:white; margin-top:20px') 고객센터
+            if(user)
+              li
+                a.nav-a-style(href='/mypage/'+user.num, style='color:white; margin-left:0px; margin-top:20px') 마이페이지
+              li
+                a.nav-a-style(href='/logout', style='color:white; margin-left:0px; margin-top:20px') 로그아웃
+    form(style='size:auto' action='/search/detail/'+car.s_num method='post')
+      .container
+        .col-sm-8.photo
+          img#car-photo(src='/'+car.carImg, align='middle')
+        .col-sm-4.information
+          if car
+            h2
+              strong= '차종 이름 : '+car.model
+            h3= '제조사 : ' +car.manu
+            h3= '판매자 : ' +car.username
+            h3= '판매자번호 : ' +car.phone1
+            h3= '가능 시간 : ' +car.time1+'~'+car.time2
+            h3= '주행거리 : ' +car.mileage+'km'
+            h3= '가격 : ' +car.price+'만원'
+      .container.explain
+        h4= '설명글 : ' +car.explanation
+      .clearfix
+          if ((user.username != car.username) && car.state == 0)
+            button.requestbtn(type='submit') 구매요청
+          else if ((user.username == car.username) && car.state == 0)
+            button.acceptbtn 구매미요청
+          else
+            button.acceptbtn 구매완료

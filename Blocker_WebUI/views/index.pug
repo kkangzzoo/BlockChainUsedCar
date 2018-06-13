@@ -1,0 +1,144 @@
+extends layout
+block content
+  body
+    nav.navbar.navbar-inverse(style='width: 200%;background-color:#4272d7')
+      .container-fluid
+        .col-sm-1
+        .col-sm-1
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a(href='/main', style='font-size:300%; background-color:#4272d7; color:white')
+            strong CarBlocker
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a.nav-a-style(href='/search', style='color:white; margin-top:20px') 차량
+            li
+              a.nav-a-style(href='/sell', style='color:white; margin-top:20px') 내 차 팔기
+            li
+              a.nav-a-style(href='#', style='color:white; margin-top:20px') 고객센터
+            if(user)
+              li
+                a.nav-a-style(href='/mypage/'+user.num, style='color:white; margin-left:0px; margin-top:20px') 마이페이지
+              li
+                a.nav-a-style(href='/logout', style='color:white; margin-left:0px; margin-top:20px') 로그아웃
+    .container
+      .row
+        #main-find-car.col-sm-9
+          #myCarousel.carousel.slide(data-ride='carousel')
+            h2
+              strong 차량 찾기
+            ul(style='padding-top:10px; padding-bottom:10px')
+              select(name='job', style='width:200px;height:50px;')
+                option(value='') 제조사
+                option(value='학생') 현대
+                option(value='회사원') 기아
+                option(value='기타') 쉐보레
+              select(name='job', style='width:200px;height:50px;')
+                option(value='') 모델
+                option(value='학생') 1
+                option(value='회사원') 2
+                option(value='기타') 3
+              select(name='job', style='width:200px;height:50px;')
+                option(value='') 세부모델
+                option(value='학생') 1
+                option(value='회사원') 2
+                option(value='기타') 3
+              button.combo-btn 차량 찾기
+        if(user)
+          .col-sm-3
+            .limiter(style='height:148px')
+              .container-login100
+                .wrap-login100.p-l-30.p-r-30.p-t-20.p-b-20(style='height:100%')
+                  form.login100-form.validate-form(action='/logout' method='get')
+                    .wrap-input100-validate-input(data-validate='Valid email is required: ex@abc.xyz')
+                      h2(style='text-align:center')= user.name +'회원님'
+                    .wrap-input100-rs1-validate-input(data-validate='Password is required')
+                      h2(style='text-align:center') 안녕하세요
+                    br
+                    .container-login100-form-btn.m-t-20
+                      button.login100-form-btn(type='submit') 로그아웃
+        else
+          .col-sm-3
+            .limiterres.render('index')
+              .container-login100
+                .wrap-login100.p-l-30.p-r-30.p-t-20.p-b-20
+                    form.login100-form.validate-form(action='/main' method='post')
+                      .wrap-input100-validate-input(data-validate='Valid email is required: ex@abc.xyz')
+                        input.input100(type='text', name='username', placeholder='Email')
+                        span.focus-input100-1
+                        span.focus-input100-2
+                      .wrap-input100-rs1-validate-input(data-validate='Password is required')
+                        input.input100(type='password', name='password', placeholder='Password')
+                        span.focus-input100-1
+                        span.focus-input100-2
+                      .container-login100-form-btn.m-t-20
+                        button.login100-form-btn(type='submit')
+                          | Sign in
+                      .text-center.p-t-20.p-b-5
+                        a.txt2.hov1(href='#', style='padding-right:10px')
+                          | 아이디/비밀번호 찾기
+                        a.txt2.hov1(href='/join', style='padding-left:10px')
+                          | 회원가입
+      hr
+    .row
+      #main-second-con.container
+        h2
+          strong 등록된 차량
+        br
+        .col-sm-1
+          // Left controls
+          a(href='/search/detail/'+cars[0].s_num, role='button', data-slide='prev')
+            span#arrow-left-right.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+            span.sr-only Previous
+        .col-sm-3
+          a(href='')
+            img.img-responsive(src='/'+cars[0].carImg, style='width:100%', alt='Image')
+          p
+        #main-reco-car.col-sm-2
+          h3= cars[0].model
+          ul
+            li= cars[0].manu
+            li= cars[0].mileage
+            li= cars[0].fuel
+        .col-sm-3
+          a(href='/search/detail/'+cars[1].s_num)
+            img.img-responsive(src='/'+cars[1].carImg, style='width:100%', alt='Image')
+          p
+        #main-reco-car.col-sm-2
+          h3= cars[1].model
+          ul
+            li= cars[1].manu
+            li= cars[1].mileage
+            li= cars[1].fuel
+        .col-sm-1
+          // Right controls
+          a(href='#myCarousel', role='button', data-slide='next')
+            span#arrow-left-right.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+            span.sr-only Next
+    .container
+      hr
+      .row
+        #main-else
+          h2(style='padding-left:20px;')
+            strong 공지사항
+          ul
+            li
+              a(href='#') 4월 3주차 정기점검
+            li
+              a(href='#') 4월 2주차 정기점검
+            li
+              a(href='#') 4월 1주차 정기점검
+        #main-else
+          h2(style='padding-left:20px;')
+            strong Q&A
+          ul
+            li
+              a(href='#') 차량 등록은 어떻게 하나요?
+            li
+              a(href='#') 허위매물 구분은 어떻게 하는 건가요?
+            li
+              a(href='#') 시세 결정은 어떻게 하는 건가요?
+    br

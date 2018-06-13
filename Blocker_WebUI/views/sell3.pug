@@ -1,0 +1,52 @@
+extends layout2
+block content
+  body
+    nav.navbar.navbar-inverse(style='width: 200%;background-color:#4272d7')
+      .container-fluid
+        .col-sm-1
+        .col-sm-1
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a(href='/main', style='font-size:300%; background-color:#4272d7; color:white')
+            strong CarBlocker
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a.nav-a-style(href='/search', style='color:white; margin-top:20px') 차량
+            li
+              a.nav-a-style(href='/sell', style='color:white; margin-top:20px') 내 차 팔기
+            li
+              a.nav-a-style(href='#', style='color:white; margin-top:20px') 고객센터
+            if(user)
+              li
+                a.nav-a-style(href='/mypage/'+user.num, style='color:white; margin-left:0px; margin-top:20px') 마이페이지
+              li
+                a.nav-a-style(href='/logout', style='color:white; margin-left:0px; margin-top:20px') 로그아웃
+  form(action='/sell3/'+index.s_num, method='post')
+    .container
+      h2
+        strong 설명글 입력
+      br
+      table.inform-table
+        tr
+          td(style='background-color:#f1f1f1') 휴대전화
+          td
+            input.phoneNum(type='tel', name='phone1')
+        tr
+          td(style='background-color:#f1f1f1') 일반전화
+          td
+            input.phoneNum(type='tel', name='phone2')
+        tr
+          td(style='background-color:#f1f1f1') 연락 가능시간
+          td
+            input.enaTime(type='time', name='time1')
+            |  ~
+            input.enaTime(type='time', name='time2')
+      br
+      h3
+        strong 설명을 작성하세요.
+      textarea(type='text', name='explanation', style='resize: none; overflow:scroll; width:100%; height:500px')
+    .container.clearfix
+      button.signupbtn(type='submit') 다음

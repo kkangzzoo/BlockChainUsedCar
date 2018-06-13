@@ -1,0 +1,78 @@
+extends layout
+block content
+  body
+    nav.navbar.navbar-inverse(style='width: 200%;background-color:#4272d7')
+      .container-fluid
+        .col-sm-1
+        .col-sm-1
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a(href='/main', style='font-size:300%; background-color:#4272d7; color:white')
+            strong CarBlocker
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a.nav-a-style(href='/search', style='color:white; margin-top:20px') 차량
+            li
+              a.nav-a-style(href='/sell', style='color:white; margin-top:20px') 내 차 팔기
+            li
+              a.nav-a-style(href='#', style='color:white; margin-top:20px') 고객센터
+            if(user)
+              li
+                a.nav-a-style(href='/mypage/'+user.num, style='color:white; margin-left:0px; margin-top:20px') 마이페이지
+              li
+                a.nav-a-style(href='/logout', style='color:white; margin-left:0px; margin-top:20px') 로그아웃
+    form(action='/action_page.php')
+      .container(style='margin-left:0; width:100%')
+        .center.col-sm-1
+          .car_side-bar
+            a(href='#')
+              h3 차종
+          .car_side-bar
+            a(href='#')
+              h3 제조사
+          .car_side-bar
+            a(href='#')
+              h3 연식
+          .car_side-bar
+            a(href='#')
+              h3 주행거리
+          .car_side-bar
+            a(href='#')
+              h3 가격
+          .car_side-bar
+            a(href='#')
+              h3 지역
+          .car_side-bar
+            a(href='#')
+              h3 색상
+          .car_side-bar
+            a(href='#')
+              h3 연료
+        .car-list.center.col-sm-11
+          div
+            each car in cars
+              .car-img
+                a(href='/search/detail/'+car.s_num)
+                  img(src='/'+car.carImg width='200' height='150')
+                p(style='text-align:center')= ''+car.model
+                p(style='text-align:center')= ''+car.price
+            #myDIV(style='padding-left:40%')
+              button.page-btn 1
+              button.page-btn.active 2
+              button.page-btn 3
+              button.page-btn 4
+              button.page-btn 5
+            script.
+              // Add active class to the current button (highlight it)
+              var header = document.getElementById("myDIV");
+              var btns = header.getElementsByClassName("page-btn");
+              for (var i = 0; i < btns.length; i++) {
+              btns[i].addEventListener("click", function() {
+              var current = document.getElementsByClassName("active");
+              current[0].className = current[0].className.replace(" active", "");
+              this.className += " active";
+              });
+              }

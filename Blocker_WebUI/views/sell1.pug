@@ -1,0 +1,131 @@
+extends layout2
+block content
+  body
+    nav.navbar.navbar-inverse(style='width: 200%;background-color:#4272d7')
+      .container-fluid
+        .col-sm-1
+        .col-sm-1
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a(href='/main', style='font-size:300%; background-color:#4272d7; color:white')
+            strong CarBlocker
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a.nav-a-style(href='/search', style='color:white; margin-top:20px') 차량
+            li
+              a.nav-a-style(href='/sell', style='color:white; margin-top:20px') 내 차 팔기
+            li
+              a.nav-a-style(href='#', style='color:white; margin-top:20px') 고객센터
+            if(user)
+              li
+                a.nav-a-style(href='/mypage/'+user.num, style='color:white; margin-left:0px; margin-top:20px') 마이페이지
+              li
+                a.nav-a-style(href='/logout', style='color:white; margin-left:0px; margin-top:20px') 로그아웃
+    form(action='/sell' method='post')
+      .container
+        h2
+          strong 차량정보 입력
+        br
+        .form-group
+          input#name(type='text', placeholder='차량 번호', name='carnum', required='')
+        br
+        .custom-select(name='_manu', style='width:200px;')
+          select(required='' name='manu')
+            option(value='0') 제조사
+            option(value='1') 현대
+            option(value='2') 기아
+            option(value='3') 삼성
+            option(value='4') 쉐보레
+            option(value='5') 쌍용
+        br
+        .custom-select(style='width:200px;', name='_model')
+          select(required='' name='model')
+            option(value='1') 모델
+            option(value='2') k7
+            option(value='3') SM6
+            option(value='4') 소나타2018
+            option(value='5') 제네시스
+        br
+        .form-group
+          input#name(type='text', placeholder='주행거리 (KM)', name='mileage', required='')
+        br
+        .form-group
+          input#name(type='text', placeholder='연료 (%)', name='fuel', required='')
+        .clearfix
+          button.signupbtn(type='submit') 다음
+      script.
+        var x, i, j, selElmnt, a, b, c;
+        /*look for any elements with the class "custom-select":*/
+        x = document.getElementsByClassName("custom-select");
+        for (i = 0; i < x.length; i++) {
+        selElmnt = x[i].getElementsByTagName("select")[0];
+        /*for each element, create a new DIV that will act as the selected item:*/
+        a = document.createElement("DIV");
+        a.setAttribute("class", "select-selected");
+        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+        x[i].appendChild(a);
+        /*for each element, create a new DIV that will contain the option list:*/
+        b = document.createElement("DIV");
+        b.setAttribute("class", "select-items select-hide");
+        for (j = 0; j < selElmnt.length; j++) {
+        /*for each option in the original select element,
+        create a new DIV that will act as an option item:*/
+        c = document.createElement("DIV");
+        c.innerHTML = selElmnt.options[j].innerHTML;
+        c.addEventListener("click", function(e) {
+        /*when an item is clicked, update the original select box,
+        and the selected item:*/
+        var y, i, k, s, h;
+        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+        h = this.parentNode.previousSibling;
+        for (i = 0; i < s.length; i++) {
+        if (s.options[i].innerHTML == this.innerHTML) {
+        s.selectedIndex = i;
+        h.innerHTML = this.innerHTML;
+        y = this.parentNode.getElementsByClassName("same-as-selected");
+        for (k = 0; k < y.length; k++) {
+        y[k].removeAttribute("class");
+        }
+        this.setAttribute("class", "same-as-selected");
+        break;
+        }
+        }
+        h.click();
+        });
+        b.appendChild(c);
+        }
+        x[i].appendChild(b);
+        a.addEventListener("click", function(e) {
+        /*when the select box is clicked, close any other select boxes,
+        and open/close the current select box:*/
+        e.stopPropagation();
+        closeAllSelect(this);
+        this.nextSibling.classList.toggle("select-hide");
+        this.classList.toggle("select-arrow-active");
+        });
+        }
+        function closeAllSelect(elmnt) {
+        /*a function that will close all select boxes in the document,
+        except the current select box:*/
+        var x, y, i, arrNo = [];
+        x = document.getElementsByClassName("select-items");
+        y = document.getElementsByClassName("select-selected");
+        for (i = 0; i < y.length; i++) {
+        if (elmnt == y[i]) {
+        arrNo.push(i)
+        } else {
+        y[i].classList.remove("select-arrow-active");
+        }
+        }
+        for (i = 0; i < x.length; i++) {
+        if (arrNo.indexOf(i)) {
+        x[i].classList.add("select-hide");
+        }
+        }
+        }
+        /*if the user clicks anywhere outside the select box,
+        then close all select boxes:*/
+        document.addEventListener("click", closeAllSelect);

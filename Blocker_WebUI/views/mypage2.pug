@@ -1,0 +1,66 @@
+extends layout
+block content
+  body
+    nav.navbar.navbar-inverse(style='width: 200%;background-color:#4272d7')
+      .container-fluid
+        .col-sm-1
+        .col-sm-1
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a(href='/main', style='font-size:300%; background-color:#4272d7; color:white')
+            strong CarBlocker
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a.nav-a-style(href='/search', style='color:white; margin-top:20px') 차량
+            li
+              a.nav-a-style(href='/sell', style='color:white; margin-top:20px') 내 차 팔기
+            li
+              a.nav-a-style(href='#', style='color:white; margin-top:20px') 고객센터
+            if(user)
+              li
+                a.nav-a-style(href='/mypage/'+user.num, style='color:white; margin-left:0px; margin-top:20px') 마이페이지
+              li
+                a.nav-a-style(href='/logout', style='color:white; margin-left:0px; margin-top:20px') 로그아웃
+    form(action='/mypage2', method='post')
+      .container(style='min-height:400px')
+        .col-sm-2
+          a(href='/mypage/'+user.num , style='color:black;')
+            h2
+              strong 마이페이지
+          hr
+          a(href='' onclick="replaceContentInContainer('mycar','modi-inform')")
+            h3 회원정보 변경
+        .col-sm-10(id='modi-inform')
+          h2
+            strong 회원정보 변경
+          hr
+          .form-group
+            label.col-md-2.col-md-offset-2(for='name') 이름
+            .col-md-6
+              .form-group
+                .col-md-11
+                  label#name= result.name
+          .form-group
+            label.col-md-2.col-md-offset-2(for='생년월일') 생년월일
+            .col-md-6
+              .form-group
+                .col-md-11
+                  label#date= result.date
+          .form-group
+            label.col-md-2.col-md-offset-2(for='psw') 비밀번호
+            .col-md-6
+              .form-group
+                .col-md-11
+                  input(type='password', placeholder='비밀번호를 입력해주세요.', name='password', required='')
+          .form-group
+            label.col-md-2.col-md-offset-2(for='psw-repeat') Repeat Password
+            .col-md-6
+              .form-group
+                .col-md-11
+                  input(type='password', placeholder='비밀번호를 재입력해주세요.', name='psw-repeat', required='')
+          button.modibtn(type='submit') 회원정보 수정
+    form(class='drop-form' style='display:inline-block;' action='/delete' method='get')
+        button.dropbtn(type='submit') 회원탈퇴

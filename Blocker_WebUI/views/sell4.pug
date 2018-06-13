@@ -1,0 +1,53 @@
+extends layout2
+block content
+  body
+    nav.navbar.navbar-inverse(style='width: 200%;background-color:#4272d7')
+      .container-fluid
+        .col-sm-1
+        .col-sm-1
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a(href='/main', style='font-size:300%; background-color:#4272d7; color:white')
+            strong CarBlocker
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a.nav-a-style(href='/search', style='color:white; margin-top:20px') 차량
+            li
+              a.nav-a-style(href='/sell', style='color:white; margin-top:20px') 내 차 팔기
+            li
+              a.nav-a-style(href='#', style='color:white; margin-top:20px') 고객센터
+            if(user)
+              li
+                a.nav-a-style(href='/mypage/'+user.num, style='color:white; margin-left:0px; margin-top:20px') 마이페이지
+              li
+                a.nav-a-style(href='/logout', style='color:white; margin-left:0px; margin-top:20px') 로그아웃
+  form(action='/sell4/'+index.s_num, method='post', enctype="multipart/form-data")
+    .container
+      h2
+        strong 사진 등록
+      br
+      .col-sm-6
+        img#image_section(style='width:100%; height:100%; max-width: 100%; max-height:100%; z-index:1; position:relative', src='images/back.jpg', alt='your image')
+        input#imgInput(type='file' name='carImg')
+        br
+      .col-sm-6
+        .col-sm-3
+          label.filebox(style='position: relative; left: 10%; top: -50px; z-index:2;', for='imgInput') 사진 등록
+    .container.clearfix
+      button.signupbtn(type='submit') 등록 완료
+      script.
+        function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        $('#image_section').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+        }
+        }
+        $("#imgInput").change(function(){
+        readURL(this);
+        });

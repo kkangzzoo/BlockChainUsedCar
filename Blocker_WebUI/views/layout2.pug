@@ -1,0 +1,294 @@
+doctype html
+html(lang='en')
+  head
+    title CarBlocker 중고차 거래
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    // ===============================================================================================
+    script(src='js/jquery-2.1.4.min.js')
+    script(src='js/bootstrap.min.js')
+    // ===============================================================================================
+    script(src='vendor/jquery/jquery-3.2.1.min.js')
+    // ===============================================================================================
+    script(src='vendor/animsition/js/animsition.min.js')
+    // ===============================================================================================
+    script(src='vendor/bootstrap/js/popper.js')
+    script(src='vendor/bootstrap/js/bootstrap.min.js')
+    // ===============================================================================================
+    script(src='vendor/select2/select2.min.js')
+    // ===============================================================================================
+    script(src='vendor/daterangepicker/moment.min.js')
+    script(src='vendor/daterangepicker/daterangepicker.js')
+    // ===============================================================================================
+    script(src='js/main.js')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='fonts/font-awesome-4.7.0/css/font-awesome.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='fonts/Linearicons-Free-v1.0.0/icon-font.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/animate/animate.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/css-hamburgers/hamburgers.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/animsition/css/animsition.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/select2/select2.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', type='text/css', href='vendor/daterangepicker/daterangepicker.css')
+    // ===============================================================================================
+    style
+      include css/util.css
+      include css/main.css
+    style.
+      /* Add a gray background color and some padding to the footer */
+      footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+      }
+      .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      min-height: 200px;
+      }
+      /* Hide the carousel text when the screen is less than 600 pixels wide */
+      @media (max-width: 600px) {
+      .carousel-caption {
+      display: none;
+      }
+      }
+      body {font-family: Arial, Helvetica, sans-serif;}
+      * {box-sizing: border-box}
+      /* Full-width input fields */
+      input[type=text], input[type=password] {
+      width: 50%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      border: none;
+      display: block;
+      background: #f1f1f1;
+      }
+      input {
+      border-radius:10px;
+      }
+      input[type=text]:focus, input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+      }
+      hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+      }
+      /* Set a style for all buttons */
+      button {
+      background-color: #A7A8A7;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+      }
+      button:hover {
+      opacity:1;
+      }
+      /* Float cancel and signup buttons and add an equal width */
+      .signupbtn {
+      float: right;
+      width: 20%;
+      }
+      /* Add padding to container elements */
+      .container {
+      padding: 16px;
+      }
+      /* Clear floats */
+      .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+      }
+      /* Change styles for cancel button and signup button on extra small screens */
+      @media screen and (max-width: 300px) {
+      .signupbtn {
+      width: 20%;
+      }
+      }
+      .center{
+      height: 500px;
+      }
+      ::placeholder{
+      color:black;
+      text-align: right;
+      }
+      ::value{
+      text-align:right;
+      }
+      .custom-select {
+      color:black;
+      position: relative;
+      font-family: Arial;
+      }
+      .custom-select select {
+      display: none; /*hide original SELECT element:*/
+      }
+      .select-selected {
+      border-radius: 10px;
+      background-color:  #f1f1f1;
+      }
+      table, tr, td{
+      border:1px solid #949393;
+      text-align: center;
+      font-size: 20px;
+      }
+      .inform-table{
+      }
+      .phoneNum{
+      width:100%;
+      height:100%;
+      padding-left: 3px;
+      border: transparent;
+      }
+      .enaTime{
+      border-radius: 5px;
+      }
+      ::placeholder{
+      color:black;
+      text-align: right;
+      }
+      ::value{
+      text-align:right;
+      }
+      #image_section{
+      }
+      .option_img{
+      margin-top:-5px;
+      width:100%;
+      height:100%;
+      max-width: 100%;
+      max-height:100%;
+      z-index:1;
+      position:relative;
+      }
+      .filebox{
+      display: inline-block;
+      padding: .5em .75em;
+      color: white;
+      font-size: inherit;
+      line-height: normal;
+      vertical-align: middle;
+      background-color: #A7A8A7;
+      cursor: pointer;
+      border: 1px solid #ebebeb;
+      border-bottom-color: #e2e2e2;
+      border-radius: .25em;
+      }
+      input[type="file"]{
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip:rect(0,0,0,0);
+      border: 0;
+      }
+      /*style the arrow inside the select element:*/
+      .select-selected:after {
+      border-radius: 10px;
+      position: absolute;
+      content: "";
+      top: 20px;
+      right: -80px;
+      width: 0;
+      height: 0;
+      border: 6px solid transparent;
+      border-color: black transparent transparent transparent;
+      }
+      /*point the arrow upwards when the select box is open (active):*/
+      .select-selected.select-arrow-active:after {
+      border-color: transparent transparent black transparent;
+      top: 7px;
+      }
+      /*style the items (options), including the selected item:*/
+      .select-items div{
+      color: black;
+      border: 1px solid transparent;
+      border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+      cursor: pointer;
+      user-select: none;
+      width:100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      border: none;
+      }
+      .select-selected {
+      color: black;
+      border: 1px solid transparent;
+      border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+      cursor: pointer;
+      user-select: none;
+      width:150%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      border: none;
+      }
+      /*style items (options):*/
+      .select-items {
+      position: absolute;
+      background-color:  #f1f1f1;
+      top: 100%;
+      left: 0;
+      right: 0;
+      width:150%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      border: none;
+      }
+      /*hide the items when the select box is closed:*/
+      .select-hide {
+      display: none;
+      }
+      .select-items div:hover, .same-as-selected {
+      background-color: rgba(0, 0, 0, 0.1);
+      }
+      ::placeholder{
+      color:black;
+      }
+      .requestbtn {
+      z-index:2;
+      
+      margin-left: 60%;
+      width: 10%;
+      }
+      .acceptbtn {
+      position:relative;
+      margin-left: 60%;
+      width: 10%;
+      }
+  block content
+  footer.container-fluid.text-center(style='background-color:#4272d7; color:white')
+    .col-sm-2
+    .col-sm-2
+      h3 차량
+      a.foot-a-style(href='/search') 차량 검색
+      br
+    .col-sm-2
+      h3 내 차 팔기
+      a.foot-a-style(href='/sell') 등록하기
+      br
+      a.foot-a-style(href='#') 비교하기
+      br
+    .col-sm-2
+      h3 고객센터
+      a.foot-a-style(href='#')
+        | Q&A
+        a.foot-a-style(href='#') 공지사항
+        br
+    .col-sm-2
+      h3 마이페이지
+      a.foot-a-style(href='#') 회원정보 변경
+      br
+    .col-sm-2
