@@ -303,8 +303,8 @@ app.post('/sell4/:id', upload.single('carImg'),function(req, res){ // 사용자�
           console.log(err);
           res.status(500).send('Internal Server Error');  //상태코드 500일 때 에러.
         }else{
-          res.send(cars[0]);
-          //res.redirect('/search');
+          //res.send(cars[0]);
+          res.redirect('/search');
         }
       })
     }
